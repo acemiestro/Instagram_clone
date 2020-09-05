@@ -1,0 +1,21 @@
+{
+    "name": "activity",
+    "version": "1.0.0",
+    "description": "// npm init -y \r // npm i express\r //  npm i nodemon --save-dev\r // create start script int Package.json=>  \"start\":\"nodemon crud/api.js\"\r // in pkg.json dir => npm start",
+    "main": "api.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon api.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "mysql": "^2.18.1",
+        "uuid": "^8.3.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.4"
+    }
+}
