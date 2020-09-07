@@ -3,12 +3,11 @@ var mysql = require('mysql')
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    // db password
-    password: 'password',
-    // db instance name 
-    database: 'insta_pp'
+    password: 'paarth0303', // db password
+    database: 'insta' // db instance name 
 })
 
 connection.connect();
+console.log("connected to db");
 
 module.exports = connection;
