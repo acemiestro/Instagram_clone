@@ -17,6 +17,7 @@ async function createUser(req, res) {
         })
     }
 }
+
 async function getUser(req, res) {
     try {
         let { user_id } = req.params;
@@ -40,8 +41,8 @@ async function getUser(req, res) {
             status: "failure",
         })
     }
-
 }
+
 async function updateUser(req, res) {
     let { user_id } = req.params;
     let updateObj = req.body;
@@ -78,6 +79,7 @@ async function deleteUser(req, res) {
         })
     }
 }
+
 async function getAllUser(req, res) {
     try {
         let user;
@@ -100,8 +102,8 @@ async function getAllUser(req, res) {
             status: "failure",
         })
     }
-
 }
+
 async function handleRequest(req, res) {
     try {
         // user_id=> public/private
@@ -114,9 +116,9 @@ async function handleRequest(req, res) {
                 status: "accepted",
                 request: mappingObj,
                 "message": "your request has been accepted"
-
             })
         }
+
         let mappingObj = await userFollowerModel.createRequest(reqobj);
         return res.status(201).json({
             status: "pending",
@@ -173,7 +175,6 @@ async function rejectRequest(req, res) {
 }
 
 async function getAllFollowers(req, res) {
-
     try {
         // user_id=> public/private
         let { user_id } = req.params;
@@ -183,17 +184,14 @@ async function getAllFollowers(req, res) {
             async function helper(userfollowObj) {
                 let { follower_id, is_pending } = userfollowObj;
                 // user table
-                let { handle, p_img_url } = await userModel
-                    .getById(follower_id);
-                console.log(handle);
-
+                let { handle, p_img_url } = await userModel.getById(follower_id);
+                // console.log(handle);
                 return { handle, p_img_url, is_pending };
             }
-            let folImgHandArr = [];
-            for (let i = 0; i < UfollResult.length; i++) {
-                let ans = await helper(UfollResult[i]);
-                folImgHandArr.push(ans);
-            }
+            let pArray = UfollResult.map(helper);
+            //  await => sync 
+            let folImgHandArr = await Promise.all(pArray);
+
             res.status(201).json({
                 success: "successfull",
                 message: folImgHandArr
@@ -207,10 +205,6 @@ async function getAllFollowers(req, res) {
         // 1. image_url
         // 2. handle
 
-        res.status(201).json({
-            success: "successfull",
-            message: `${handle} rejected`
-        })
     } catch (err) {
         res.status(500).json({
             success: "failure",

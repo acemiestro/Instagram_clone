@@ -11,3 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* ui css */
+.app{
+  display: flex;
+}
+.userView{
+  width: 40vw;
+  height: 100vh;
+  background-color: lightgray;
+  display: flex;
+  justify-content: space-around;
+}
+
+.profile-stats {
+  display: flex;
+}
+
+.profile-menu {
+  cursor: pointer;
+}
