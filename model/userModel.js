@@ -1,21 +1,10 @@
 const db = require("./connection");
 const { v4: uuidv4 } = require('uuid');
+const { createEntityFact } = require("../utility/modelFactory");
 //  db => model , authentication
-const create = function(userobj) {
-    // create user in db
-    userobj.uid = uuidv4();
-    // validation=> extra value 
-    return new Promise(function(resolve, reject) {
-        db.query('INSERT INTO user SET ?', userobj, function(err, result) {
-            // Neat!
-            if (err) {
-                reject(err)
-            } else {
-                resolve(userobj);
-            }
-        });
-    })
-}
+
+// create user in db
+const createUser = createEntityFact("user");
 
 const getById = function(id, selectionobj) {
     // get user in db
@@ -80,7 +69,7 @@ const deleteById = function(id) {
     })
 }
 
-module.exports.create = create
+module.exports.create = createUser
 module.exports.getById = getById
 module.exports.getAll = getAll
 module.exports.updateById = updateById

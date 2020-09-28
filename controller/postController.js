@@ -1,16 +1,24 @@
 const postDB = require("../model/post.json");
+const postModel=require("../model/postModel");
 
-function createPost(req, res) {
-    let post = req.body;
-    // if a new entry is created on server
-    // memory -> ram
-    postDB.push(post);
-    fs.writeFileSync(path.join(__dirname, "post.json"), JSON.stringify(postDB));
-    // res status code server send 
-    res.status(201).json({
-        success: "successfull",
-        post: post
-    })
+async function createPost(req, res) {
+    try {
+        let nPost = await postModel.create(req.body);
+        // if a new entry is created on server
+        // memory -> ram
+        // postDB.push(post);
+        // fs.writeFileSync(path.join(__dirname, "post.json"), JSON.stringify(postDB));
+        // res status code server send 
+        res.status(201).json({
+            success: "successfull",
+            post: nPost
+        }) 
+    } catch (err) {
+        res.status(500).json({
+            success: "failure",
+            "message": err.message
+        })
+    }
 }
 
 function getPost(req, res) {
