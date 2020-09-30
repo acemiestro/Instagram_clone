@@ -7,7 +7,7 @@ module.exports.createEntityFact = function (entity) {
         // create user in db
         // google / facebook 
         entityObj.id = uuidv4();
-        if(entity == "post") {
+        if (entity == "post") {
             let date = new Date();
             entityObj.created_at = date.toISOString().slice(0, 19).replace('T', ' ');
         }
@@ -24,5 +24,4 @@ module.exports.createEntityFact = function (entity) {
             });
         })
     }
-
-} 
+}

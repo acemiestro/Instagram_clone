@@ -1,8 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import ProfileDetails from './components/user/ProfileDetails';
+
+import ProFileDetails from "./components/user/ProfileDetails";
+import Settings from "./components/SettingsPage";
+import LoginPage from "./components/LoginPage";
+import PageNotFound from "./components/PageNotFound";
+import { BrowserRouter, Switch, Route,Redirect } from "react-router-dom";
 import axios from 'axios';
+import './index.css';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -87,16 +92,34 @@ function MenuList(props) {
 function App() {
     return (
         <React.Fragment>
-            <div className="app">
-                <UserView></UserView>
-                <div className="postView">PostView</div>
-            </div>
-        </React.Fragment>
+            <Switch>
+                <Route path="/profile" exact>
+                    <div className="app">
+                        <UserView></UserView>
+                        <div className="postView"> PostView</div>
+                    </div>
+                </Route>
+                
+                <Route path="/" exact>
+                    <LoginPage></LoginPage>
+                </Route>
+
+                <Redirect path="/login" exact></Redirect>
+                
+                <Route path="/settings" exact>
+                    <Settings></Settings>
+                </Route>
+
+                <Route>
+                <PageNotFound></PageNotFound>
+                </Route>
+            </Switch>
+        </React.Fragment >
     );
 }
 
 ReactDOM.render(
-    <App />, document.getElementById('root')
+    <BrowserRouter><App /></BrowserRouter>, document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

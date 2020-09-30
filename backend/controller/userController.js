@@ -1,11 +1,11 @@
-let userDB = require("../model/user.json");
-let userModel = require("../model/userModel");
-let userFollowerModel = require("../model/userFollowerModel");
+let userDB = require("../../model/user.json");
+let userModel = require("../../model/userModel");
+let userFollowerModel = require("../../model/userFollowerModel");
 
+// ********************CRUD USER*****************
 async function createUser(req, res) {
     try {
         let ndbuser = await userModel.create(req.body);
-        // res status code server send 
         res.status(201).json({
             success: "successfull",
             user: ndbuser
@@ -46,7 +46,12 @@ async function getUser(req, res) {
 async function updateUser(req, res) {
     let { user_id } = req.params;
     let updateObj = req.body;
-
+    console.log(req.body)
+    let img;
+    if (req.file) {
+        img = req.file.filename;
+        updateObj.p_img_url = img;
+    }
     try {
         await userModel.updateById(user_id, updateObj);
         const uUser = await userModel.getById(user_id);
@@ -104,6 +109,7 @@ async function getAllUser(req, res) {
     }
 }
 
+// *******************Request***********************
 async function handleRequest(req, res) {
     try {
         // user_id=> public/private
@@ -204,7 +210,6 @@ async function getAllFollowers(req, res) {
         }
         // 1. image_url
         // 2. handle
-
     } catch (err) {
         res.status(500).json({
             success: "failure",

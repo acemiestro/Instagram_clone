@@ -4,15 +4,10 @@ const postModel=require("../model/postModel");
 async function createPost(req, res) {
     try {
         let nPost = await postModel.create(req.body);
-        // if a new entry is created on server
-        // memory -> ram
-        // postDB.push(post);
-        // fs.writeFileSync(path.join(__dirname, "post.json"), JSON.stringify(postDB));
-        // res status code server send 
         res.status(201).json({
             success: "successfull",
             post: nPost
-        }) 
+        })
     } catch (err) {
         res.status(500).json({
             success: "failure",
@@ -76,7 +71,7 @@ function deletePost(req, res) {
     let { post_id } = req.params;
     // {post_id:12345}
     let initialpostL = postDB.length;
-    postDB = postDB.filter(function(post) {
+    postDB = postDB.filter(function (post) {
         return post.post_id != post_id;
     })
     if (initialpostL == postDB.length) {
