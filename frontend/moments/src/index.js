@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import ProFileDetails from "./components/user/ProfileDetails";
+import ProfileDetails from "./components/user/ProfileDetails";
 import Settings from "./components/SettingsPage";
 import LoginPage from "./components/LoginPage";
 import PageNotFound from "./components/PageNotFound";

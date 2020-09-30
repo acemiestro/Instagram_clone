@@ -1,6 +1,6 @@
-let userDB = require("../../model/user.json");
-let userModel = require("../../model/userModel");
-let userFollowerModel = require("../../model/userFollowerModel");
+let userDB = require("../model/user.json");
+let userModel = require("../model/userModel");
+let userFollowerModel = require("../model/userFollowerModel");
 
 // ********************CRUD USER*****************
 async function createUser(req, res) {
