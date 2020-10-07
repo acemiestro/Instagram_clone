@@ -106,7 +106,7 @@ function App() {
 
                 <Redirect path="/login" exact></Redirect>
                 
-                <Route path="/settings" exact>
+                <Route path="/setting" exact>
                     <Settings></Settings>
                 </Route>
 

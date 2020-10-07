@@ -7,7 +7,7 @@ const postRouter = require("./router/postRouter");
 
 // to send static resources to client 
 app.use(express.static("view"))
-app.use(express.static("public"))
+app.use(express.static(path.join(__dirname, "public")));
 
 // pre-defined
 app.use(express.json());

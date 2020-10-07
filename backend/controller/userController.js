@@ -50,7 +50,7 @@ async function updateUser(req, res) {
     let img;
     if (req.file) {
         img = req.file.filename;
-        updateObj.p_img_url = img;
+        updateObj.p_img_url = "/user/" + img;
     }
     try {
         await userModel.updateById(user_id, updateObj);
